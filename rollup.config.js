@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import preprocess from 'svelte-preprocess';
 import replace from '@rollup/plugin-replace';
+import babel from 'rollup-plugin-babel';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -66,6 +67,28 @@ export default [{
 		}),
 		commonjs(),
 
+		babel({
+			extensions: ['.js', '.mjs', '.html', '.svelte'],
+			runtimeHelpers: true,
+			exclude: ['node_modules/@babel/**'],
+			presets: [
+				[
+					'@babel/preset-env',
+					{
+						targets: '> 0.25%, not dead'
+					}
+				]
+			],
+			plugins: [
+				'@babel/plugin-syntax-dynamic-import',
+				[
+					'@babel/plugin-transform-runtime',
+					{
+						useESModules: true
+					}
+				]
+			]
+		}),
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),

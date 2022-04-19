@@ -1,6 +1,10 @@
-# PIXXIO JSDK
+# PIXXIO JSDK Next JS Integration
 
 This Library helps you to integrate pixx.io DAM Features to your application.
+
+## Fork Information
+
+If you want to use this component inside of your next js application you will receive some problems with es6 features and SSR. I have added babel and tested it in a next js 11 project. 
 
 ## SETUP
 

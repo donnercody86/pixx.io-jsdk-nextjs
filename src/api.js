@@ -59,7 +59,7 @@ export class API {
     this.proxyConfig = JSON.parse(localStorage.getItem('proxy'));
     return new Promise((resolve, reject) => {
       const request = (requestData, headers) => {
-        const url = 'https://' + this.mediaspace.replace(/(http|https):\/\//, '') + '/gobackend' + path;
+        const url = this.mediaspace + '/gobackend' + path;
         let params = requestData;
         if (useURLSearchParams) {
           params = new URLSearchParams();
@@ -101,6 +101,7 @@ export class API {
         axios({
           url: observeCall.url,
           proxy: this.proxyConfig,
+
           ...observeCall.request
         }).then(({data}) => {
           
